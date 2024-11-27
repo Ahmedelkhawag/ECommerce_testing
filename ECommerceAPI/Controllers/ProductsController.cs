@@ -28,5 +28,16 @@ namespace ECommerceAPI.Controllers
             var productsDTO = mapper.Map<List<ProductDTO>>(products);
             return Ok(productsDTO);
         }
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetPrioductByID(int id)
+        { 
+        var prod = _productRepository.GetByIdAsync(id);
+            if (prod is null)
+            {
+                return BadRequest(ModelState);
+            }
+            return Ok(prod);
+        }
+            
     }
 }
